@@ -2,6 +2,24 @@
 #include <vector>
 #include <cstdint>
 
+void draw_pixel(std::vector<uint32_t>& buffer, int x, int y, int width, int height, uint32_t color) {
+    if(x >= 0 && x < width && y >= 0 && y < height) {
+        buffer[y * width + x] = color;
+    }
+}
+
+void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_height, int max_width, int width, int height, uint32_t color) {
+    if(max_width >= 0 && max_width < width && fix_height >= 0 && fix_height < height) {
+        for(int x = 0; x <= max_width; x++) {
+            draw_pixel(buffer, x, fix_height, width, height, color);
+        }
+    }
+}
+
+void clear_screen(std::vector<uint32_t>& buffer, uint32_t color) {
+    std::fill(buffer.begin(), buffer.end(), color);
+}
+
 int main(int argc, char *argv[]) {
 
     const int WIDTH = 800;
@@ -76,6 +94,11 @@ int main(int argc, char *argv[]) {
     bool running = true;
     SDL_Event event;
 
+    // Starting position
+    int pixel_x = 0;
+    int pixel_y = 300;
+    uint32_t redColor = 0xFFFF0000;
+
     // Main loop
     while(running) {
         while(SDL_PollEvent(&event)) {
@@ -84,13 +107,22 @@ int main(int argc, char *argv[]) {
             }
         }
 
-        // Manually painting a pixel (center of the screen)
-        int x = 400;
-        int y = 300;
-        
-        uint32_t redColor = 0xFFFF0000;
+        // Clear screen
+        clear_screen(framebuffer, 0xFF000000);
 
-        framebuffer[y * WIDTH + x] = redColor;
+        draw_horizontal_line(framebuffer, 300, 400, WIDTH, HEIGHT, 0xFF00FF00);
+
+        /* Animation
+
+        draw_pixel(framebuffer, pixel_x, pixel_y, WIDTH, HEIGHT, redColor);
+
+        pixel_x++;
+
+        if(pixel_x >= WIDTH) {
+            pixel_x = 0;
+        }
+
+        */
 
         // Array upload
         SDL_UpdateTexture(
