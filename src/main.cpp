@@ -8,10 +8,18 @@ void draw_pixel(std::vector<uint32_t>& buffer, int x, int y, int width, int heig
     }
 }
 
-void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_height, int max_width, int width, int height, uint32_t color) {
-    if(max_width >= 0 && max_width < width && fix_height >= 0 && fix_height < height) {
-        for(int x = 0; x <= max_width; x++) {
-            draw_pixel(buffer, x, fix_height, width, height, color);
+void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_y, int max_x, int width, int height, uint32_t color) {
+    if(max_x >= 0 && max_x < width && fix_y >= 0 && fix_y < height) {
+        for(int x = 0; x <= max_x; x++) {
+            draw_pixel(buffer, x, fix_y, width, height, color);
+        }
+    }
+}
+
+void draw_vertical_line(std::vector<uint32_t>& buffer, int fix_x, int max_y, int width, int height, uint32_t color) {
+    if(max_y >= 0 && max_y < height && fix_x >= 0 && fix_x < width) {
+        for(int y = 0; y <= max_y; y++) {
+            draw_pixel(buffer, fix_x, y, width, height, color);
         }
     }
 }
@@ -98,6 +106,8 @@ int main(int argc, char *argv[]) {
     int pixel_x = 0;
     int pixel_y = 300;
     uint32_t redColor = 0xFFFF0000;
+    uint32_t blueColor = 0xFF0000FF;
+    uint32_t greenColor = 0xFF00FF00;
 
     // Main loop
     while(running) {
@@ -110,7 +120,8 @@ int main(int argc, char *argv[]) {
         // Clear screen
         clear_screen(framebuffer, 0xFF000000);
 
-        draw_horizontal_line(framebuffer, 300, 400, WIDTH, HEIGHT, 0xFF00FF00);
+        draw_horizontal_line(framebuffer, 300, 400, WIDTH, HEIGHT, blueColor);
+        draw_vertical_line(framebuffer, 400, 300, WIDTH, HEIGHT, greenColor);
 
         /* Animation
 
