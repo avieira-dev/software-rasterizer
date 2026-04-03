@@ -8,6 +8,43 @@ void draw_pixel(std::vector<uint32_t>& buffer, int x, int y, int width, int heig
     }
 }
 
+void draw_line(std::vector<uint32_t>& buffer, int x0, int y0, int x1, int y1, int width, int height, uint32_t color) {
+    // Calculate the distances
+    int dx = abs(x1 - x0);
+    int dy = -abs(y1 - y0);
+
+    // Direction of the steps
+    int sx = (x0 < x1) ? 1 : -1;
+    int sy = (y0 < y1) ? 1 : -1;
+
+    // Initial error
+    int error = dx + dy;
+
+    while(true) {
+        // Draw the current pixel
+        draw_pixel(buffer, x0, y0, width, height, color);
+
+        if(x0 == x1 && y0 == y1) {
+            break;
+        }
+
+        int error2 = 2 * error;
+
+        // Walk on the X axis?
+        if(error2 >= dy) {
+            error += dy;
+            x0 += sx;
+        }
+
+        // Walk on the Y axis?
+        if(error2 <= dx) {
+            error += dx;
+            y0 += sy;
+        }
+    }
+}
+
+/*
 void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_y, int max_x, int width, int height, uint32_t color) {
     if(max_x >= 0 && max_x < width && fix_y >= 0 && fix_y < height) {
         for(int x = 0; x <= max_x; x++) {
@@ -23,6 +60,7 @@ void draw_vertical_line(std::vector<uint32_t>& buffer, int fix_x, int max_y, int
         }
     }
 }
+*/
 
 void clear_screen(std::vector<uint32_t>& buffer, uint32_t color) {
     std::fill(buffer.begin(), buffer.end(), color);
@@ -108,6 +146,7 @@ int main(int argc, char *argv[]) {
     uint32_t redColor = 0xFFFF0000;
     uint32_t blueColor = 0xFF0000FF;
     uint32_t greenColor = 0xFF00FF00;
+    uint32_t yellowColor = 0xFFFFFF00;
 
     // Main loop
     while(running) {
@@ -120,8 +159,15 @@ int main(int argc, char *argv[]) {
         // Clear screen
         clear_screen(framebuffer, 0xFF000000);
 
+        draw_line(framebuffer, 400, 300, 700, 100, WIDTH, HEIGHT, blueColor);
+        draw_line(framebuffer, 400, 300, 700, 500, WIDTH, HEIGHT, redColor);
+        draw_line(framebuffer, 400, 300, 100, 300, WIDTH, HEIGHT, greenColor);
+        draw_line(framebuffer, 400, 300, 400, 50, WIDTH, HEIGHT, yellowColor);
+
+        /*
         draw_horizontal_line(framebuffer, 300, 400, WIDTH, HEIGHT, blueColor);
         draw_vertical_line(framebuffer, 400, 300, WIDTH, HEIGHT, greenColor);
+        /*
 
         /* Animation
 
