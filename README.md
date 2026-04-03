@@ -8,26 +8,64 @@
 ![license](https://img.shields.io/badge/license-MIT-blue)
 
 > [!NOTE]  
-> This project is a personal learning exercise focused on understanding software   
-> rasterization, framebuffers, and graphics pipelines.  It is experimental and  
-> primarily for study purposes.
+> A real-time software rasterizer built from scratch in C++, focusing on the fundamentals of the graphics pipeline and memory manipulation.
 
 ## Table of Contents
+- [Showcase](#showcase)
 - [Core Technologies](#core-technologies)
+- [Implementations](#implementations)
+- [How to Run](#how-to-run)
 - [Project Structure](#project-structure)
-- [Current Goals](#current-goals)
+- [Roadmap](#roadmap)
 - [Developer](#developer)
 - [License](#license)
+
+## Showcase
+Current engine output demonstrating **Bresenham's Line Algorithm** handling different colors and all slope octants:
+
+![Bresenham Demo](./screenshots/img-001.png)
 
 ## Core Technologies
 - C++
 - SDL2
 - CMake
 
+## Implementations
+- ✅ **Direct Framebuffer Access**: Manual manipulation of a `std::vector<uint32_t>` as video memory.
+- ✅ **Custom Drawing Primitives:**
+    - `draw_pixel`: Includes boundary checks (clipping) to prevent memory access violations.
+    - `clear_screen`: Efficient buffer clearing.
+- ✅ **Bresenham's Line Algorithm**: High-performance line drawing using only integer arithmetic.
+- ✅ **SDL2 Integration**: Window management and real-time texture streaming.
+
+## How to Run
+- C++ Compiler (GCC/Clang/MSVC)
+- CMake (3.10+)
+- SDL2 Library
+
+### Building
+
+```bash
+# Clone the repository
+git clone https://github.com/avieira-dev/software-rasterizer.git
+cd software-rasterizer
+
+# Create build directory
+mkdir build && cd build
+
+# Configure and build
+cmake ..
+make
+
+# Run the executable
+./SoftwareRasterizer
+```
+
 ## Project Structure
 
 ```text
 software-rasterizer/
+├── screenshots/
 ├── include/
 ├── src/
 ├── .gitignore
@@ -36,9 +74,13 @@ software-rasterizer/
 └── README.md
 ```
 
-## Current Goals
-- Implement a basic framebuffer
-- Rasterize triangles with colors
+## Roadmap
+- ✅ Basic Framebuffer and SDL2 Setup
+- ✅ Bresenham Line Algorithm
+- ❌ Wireframe Triangles
+- ❌ Triangle Filling (Scanline or Barycentric)
+- ❌ 3D Wireframe Cube (Projections)
+- ❌ Z-Buffer (Depth testing)
 
 ## Developer
 **Alexandre Vieira**  
