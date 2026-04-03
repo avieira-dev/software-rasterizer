@@ -44,6 +44,13 @@ void draw_line(std::vector<uint32_t>& buffer, int x0, int y0, int x1, int y1, in
     }
 }
 
+void draw_triangle(std::vector<uint32_t>& buffer, int x0, int y0, int x1, int y1, int x2, int y2, int width, int height, uint32_t color) {
+    // Connect the 3 vertices to close the shape
+    draw_line(buffer, x0, y0, x1, y1, width, height, color);
+    draw_line(buffer, x1, y1, x2, y2, width, height, color);
+    draw_line(buffer, x2, y2, x0, y0, width, height, color);
+}
+
 /*
 void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_y, int max_x, int width, int height, uint32_t color) {
     if(max_x >= 0 && max_x < width && fix_y >= 0 && fix_y < height) {
@@ -159,10 +166,16 @@ int main(int argc, char *argv[]) {
         // Clear screen
         clear_screen(framebuffer, 0xFF000000);
 
+        draw_triangle(framebuffer, 400, 100, 200, 450, 600, 450, WIDTH, HEIGHT, greenColor);
+        draw_triangle(framebuffer, 100, 50, 150, 250, 50, 200, WIDTH, HEIGHT, redColor);
+        draw_triangle(framebuffer, 700, 50, 710, 500, 650, 480, WIDTH, HEIGHT, yellowColor);
+
+        /* 
         draw_line(framebuffer, 400, 300, 700, 100, WIDTH, HEIGHT, blueColor);
         draw_line(framebuffer, 400, 300, 700, 500, WIDTH, HEIGHT, redColor);
         draw_line(framebuffer, 400, 300, 100, 300, WIDTH, HEIGHT, greenColor);
         draw_line(framebuffer, 400, 300, 400, 50, WIDTH, HEIGHT, yellowColor);
+        */
 
         /*
         draw_horizontal_line(framebuffer, 300, 400, WIDTH, HEIGHT, blueColor);
