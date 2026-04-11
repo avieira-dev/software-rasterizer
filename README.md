@@ -21,10 +21,13 @@
 - [License](#license)
 
 ## Showcase
-Current engine output demonstrating **Bresenham's Line Algorithm** handling different colors and all slope octants:
-
-![Bresenham Demo](./screenshots/img-001.png)
-
+<p align="center">
+    <em>Bresenham's line algorithm demonstrating various slopes and colors.</em><br>
+    <img src="./screenshots/img-001.png" alt="Multiple colored lines rendered at different angles using Bresenham's algorithm" width="600">
+    <br><br>
+    <em>Wireframe triangles formed by connecting vertices with the line primitive.</em><br>
+    <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600">
+</p>
 ## Core Technologies
 - C++
 - SDL2
@@ -77,7 +80,7 @@ software-rasterizer/
 ## Roadmap
 - ✅ Basic Framebuffer and SDL2 Setup
 - ✅ Bresenham Line Algorithm
-- ❌ Wireframe Triangles
+- ✅ Wireframe Triangles
 - ❌ Triangle Filling (Scanline or Barycentric)
 - ❌ 3D Wireframe Cube (Projections)
 - ❌ Z-Buffer (Depth testing)
