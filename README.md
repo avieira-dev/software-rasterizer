@@ -2,10 +2,12 @@
 
 > Software rasterizer in C++, focused on real-time rendering and graphics pipelines.
 
-![status](https://img.shields.io/badge/status-in%20development-orange)
-![language](https://img.shields.io/badge/language-C++-blue)
-![build](https://img.shields.io/badge/build-CMake-red)
-![license](https://img.shields.io/badge/license-MIT-blue)
+<p align="center">
+  <img src="https://img.shields.io/badge/status-in%20development-f39c12"/>
+  <img src="https://img.shields.io/badge/language-C++-00599C"/>
+  <img src="https://img.shields.io/badge/build-CMake-8a63d2"/>
+  <img src="https://img.shields.io/badge/license-MIT-6e7781"/>
+</p>
 
 > [!NOTE]  
 > A real-time software rasterizer built from scratch in C++, focusing on the fundamentals of the graphics pipeline and memory manipulation.
