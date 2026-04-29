@@ -30,6 +30,7 @@
     <em>Wireframe triangles formed by connecting vertices with the line primitive.</em><br>
     <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600">
 </p>
+
 ## Core Technologies
 - C++
 - SDL2
