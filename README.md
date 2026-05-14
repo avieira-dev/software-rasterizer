@@ -1,96 +1,131 @@
-# Software Rasterizer
+<div align="center">
 
-> Software rasterizer in C++, focused on real-time rendering and graphics pipelines.
+<h1>Software Rasterizer</h1>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-in%20development-f39c12"/>
-  <img src="https://img.shields.io/badge/language-C++-00599C"/>
-  <img src="https://img.shields.io/badge/build-CMake-8a63d2"/>
-  <img src="https://img.shields.io/badge/license-MIT-6e7781"/>
+<p>A real-time software rasterizer built from scratch in C++, exploring the fundamentals of the graphics pipeline through direct memory manipulation.</p>
+
+<p>
+  <img src="https://img.shields.io/badge/status-in%20development-f39c12?style=flat-square"/>
+  <img src="https://img.shields.io/badge/language-C++-00599C?style=flat-square&logo=cplusplus&logoColor=white"/>
+  <img src="https://img.shields.io/badge/build-CMake-8a63d2?style=flat-square&logo=cmake&logoColor=white"/>
+  <img src="https://img.shields.io/badge/license-MIT-6e7781?style=flat-square"/>
 </p>
 
-> [!NOTE]  
-> A real-time software rasterizer built from scratch in C++, focusing on the fundamentals of the graphics pipeline and memory manipulation.
+</div>
+
+---
 
 ## Table of Contents
+
+- [About](#about)
 - [Showcase](#showcase)
-- [Core Technologies](#core-technologies)
 - [Implementations](#implementations)
-- [How to Run](#how-to-run)
-- [Project Structure](#project-structure)
 - [Roadmap](#roadmap)
+- [Build & Run](#build--run)
+- [Project Structure](#project-structure)
 - [Developer](#developer)
 - [License](#license)
 
+---
+
+## About
+
+This project implements a graphics pipeline entirely in software — no GPU API, no hardware rasterization. Every pixel is computed on the CPU and written directly to a framebuffer represented as a `std::vector<uint32_t>`.
+
+The goal is to understand from first principles what a GPU does internally: how triangles get transformed, clipped, and filled; how depth testing works; and how a frame ends up on screen.
+
+**Core stack:** C++ · SDL2 · CMake
+
+---
+
 ## Showcase
+
 <p align="center">
-    <em>Bresenham's line algorithm demonstrating various slopes and colors.</em><br>
-    <img src="./screenshots/img-001.png" alt="Multiple colored lines rendered at different angles using Bresenham's algorithm" width="600">
-    <br><br>
-    <em>Wireframe triangles formed by connecting vertices with the line primitive.</em><br>
-    <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600">
+  <em>Bresenham's line algorithm — various slopes and colors</em><br>
+  <img src="./screenshots/img-001.png" alt="Multiple colored lines at different angles" width="600"/><br><br>
+  <em>Wireframe triangles — vertices connected using the line primitive</em><br>
+  <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600"/>
 </p>
 
-## Core Technologies
-- C++
-- SDL2
-- CMake
+---
 
 ## Implementations
-- ✅ **Direct Framebuffer Access**: Manual manipulation of a `std::vector<uint32_t>` as video memory.
-- ✅ **Custom Drawing Primitives:**
-    - `draw_pixel`: Includes boundary checks (clipping) to prevent memory access violations.
-    - `clear_screen`: Efficient buffer clearing.
-- ✅ **Bresenham's Line Algorithm**: High-performance line drawing using only integer arithmetic.
-- ✅ **SDL2 Integration**: Window management and real-time texture streaming.
 
-## How to Run
-- C++ Compiler (GCC/Clang/MSVC)
-- CMake (3.10+)
-- SDL2 Library
+### Framebuffer
+- **Direct memory access** — the framebuffer is a raw `std::vector<uint32_t>` treated as video memory
+- **`draw_pixel`** — bounds-checked pixel write; prevents out-of-range memory access
+- **`clear_screen`** — fast full-buffer clear each frame
 
-### Building
+### Primitives
+- **Bresenham's Line Algorithm** — integer-only line rasterization; no floating point, no divisions
+
+### Platform
+- **SDL2** — window creation, event handling, and real-time texture streaming to the display
+
+---
+
+## Roadmap
+
+| Feature | Status |
+|---|---|
+| Framebuffer setup & SDL2 integration | ✅ Done |
+| Bresenham line algorithm | ✅ Done |
+| Wireframe triangles | ✅ Done |
+| Triangle filling (scanline / barycentric) | 🔲 Planned |
+| 3D wireframe with perspective projection | 🔲 Planned |
+| Z-buffer and depth testing | 🔲 Planned |
+
+---
+
+## Build & Run
+
+### Prerequisites
+
+| Dependency | Version |
+|---|---|
+| C++ compiler (GCC / Clang) | C++17 or later |
+| CMake | 3.10+ |
+| SDL2 | Latest stable |
+
+### Steps
 
 ```bash
 # Clone the repository
 git clone https://github.com/avieira-dev/software-rasterizer.git
 cd software-rasterizer
 
-# Create build directory
-mkdir build && cd build
-
 # Configure and build
+mkdir build && cd build
 cmake ..
 make
 
-# Run the executable
+# Run
 ./SoftwareRasterizer
 ```
+
+---
 
 ## Project Structure
 
 ```text
 software-rasterizer/
-├── screenshots/
-├── include/
-├── src/
-├── .gitignore
+├── include/            # Header files
+├── src/                # Source files
+├── screenshots/        # Showcase images
 ├── CMakeLists.txt
 ├── LICENSE
 └── README.md
 ```
 
-## Roadmap
-- ✅ Basic Framebuffer and SDL2 Setup
-- ✅ Bresenham Line Algorithm
-- ✅ Wireframe Triangles
-- ❌ Triangle Filling (Scanline or Barycentric)
-- ❌ 3D Wireframe Cube (Projections)
-- ❌ Z-Buffer (Depth testing)
+---
 
 ## Developer
-**Alexandre Vieira**  
+
+**Alexandre Vieira**
 GitHub: [@avieira-dev](https://github.com/avieira-dev)
 
+---
+
 ## License
-Distributed under the license [MIT License](LICENSE). See the **LICENSE** file for more details.
+
+Distributed under the [MIT License](LICENSE). See `LICENSE` for details.
