@@ -96,11 +96,10 @@ cd software-rasterizer
 
 # Configure and build
 mkdir build && cd build
-cmake ..
-make
+cmake .. && cmake --build .
 
 # Run
-./SoftwareRasterizer
+./software-rasterizer
 ```
 
 ---
@@ -109,13 +108,17 @@ make
 
 ```text
 software-rasterizer/
-├── include/            # Header files
-├── src/                # Source files
-├── screenshots/        # Showcase images
+├── include/
+│   └── core/
+│       └── framebuffer.h
+├── src/
+│   ├── core/
+│   │   └── framebuffer.cpp
+│   └── main.cpp
+├── screenshots/
 ├── CMakeLists.txt
 ├── LICENSE
 └── README.md
-```
 
 ---
 

@@ -1,14 +1,17 @@
+#include <core/framebuffer.h>
+
 #include <SDL.h>
 #include <vector>
 #include <cstdint>
 
-void draw_pixel(std::vector<uint32_t>& buffer, int x, int y, int width, int height, uint32_t color) {
-    if(x >= 0 && x < width && y >= 0 && y < height) {
-        buffer[y * width + x] = color;
-    }
+void draw_pixel(Framebuffer& fb, int x, int y, uint32_t color) {
+
+    fb.setPixel(x, y, color);
 }
 
-void draw_line(std::vector<uint32_t>& buffer, int x0, int y0, int x1, int y1, int width, int height, uint32_t color) {
+// Bresenham's Algorithm
+void draw_line(Framebuffer& fb, int x0, int y0, int x1, int y1, int width, int height, uint32_t color) {
+
     // Calculate the distances
     int dx = abs(x1 - x0);
     int dy = -abs(y1 - y0);
@@ -20,58 +23,56 @@ void draw_line(std::vector<uint32_t>& buffer, int x0, int y0, int x1, int y1, in
     // Initial error
     int error = dx + dy;
 
-    while(true) {
+    while (true) {
         // Draw the current pixel
-        draw_pixel(buffer, x0, y0, width, height, color);
+        draw_pixel(fb, x0, y0, color);
 
-        if(x0 == x1 && y0 == y1) {
+        if (x0 == x1 && y0 == y1) {
             break;
         }
 
         int error2 = 2 * error;
 
         // Walk on the X axis?
-        if(error2 >= dy) {
+        if (error2 >= dy) {
             error += dy;
             x0 += sx;
         }
 
         // Walk on the Y axis?
-        if(error2 <= dx) {
+        if (error2 <= dx) {
             error += dx;
             y0 += sy;
         }
     }
 }
 
-void draw_triangle(std::vector<uint32_t>& buffer, int x0, int y0, int x1, int y1, int x2, int y2, int width, int height, uint32_t color) {
-    // Connect the 3 vertices to close the shape
-    draw_line(buffer, x0, y0, x1, y1, width, height, color);
-    draw_line(buffer, x1, y1, x2, y2, width, height, color);
-    draw_line(buffer, x2, y2, x0, y0, width, height, color);
+void draw_triangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, int width, int height, uint32_t color) {
+
+    draw_line(fb, x0, y0, x1, y1, width, height, color);
+    draw_line(fb, x1, y1, x2, y2, width, height, color);
+    draw_line(fb, x2, y2, x0, y0, width, height, color);
 }
 
 /*
 void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_y, int max_x, int width, int height, uint32_t color) {
-    if(max_x >= 0 && max_x < width && fix_y >= 0 && fix_y < height) {
-        for(int x = 0; x <= max_x; x++) {
+
+    if (max_x >= 0 && max_x < width && fix_y >= 0 && fix_y < height) {
+        for (int x = 0; x <= max_x; x++) {
             draw_pixel(buffer, x, fix_y, width, height, color);
         }
     }
 }
 
 void draw_vertical_line(std::vector<uint32_t>& buffer, int fix_x, int max_y, int width, int height, uint32_t color) {
-    if(max_y >= 0 && max_y < height && fix_x >= 0 && fix_x < width) {
-        for(int y = 0; y <= max_y; y++) {
+
+    if (max_y >= 0 && max_y < height && fix_x >= 0 && fix_x < width) {
+        for (int y = 0; y <= max_y; y++) {
             draw_pixel(buffer, fix_x, y, width, height, color);
         }
     }
 }
 */
-
-void clear_screen(std::vector<uint32_t>& buffer, uint32_t color) {
-    std::fill(buffer.begin(), buffer.end(), color);
-}
 
 int main(int argc, char *argv[]) {
 
@@ -98,7 +99,6 @@ int main(int argc, char *argv[]) {
         0
     );
 
-    // Check that the window was successfully created
     if(!window) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create window: %s\n", SDL_GetError());
 
@@ -113,8 +113,7 @@ int main(int argc, char *argv[]) {
         SDL_RENDERER_ACCELERATED
     );
 
-    // Verify that the renderer was created successfully
-    if(!renderer) {
+    if (!renderer) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Unable to render: %s\n", SDL_GetError());
 
         SDL_DestroyWindow(window);
@@ -131,8 +130,7 @@ int main(int argc, char *argv[]) {
         HEIGHT
     );
 
-    // Check if the texture was created successfully
-    if(!texture) {
+    if (!texture) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "It was not possible to create the texture: %s\n", SDL_GetError());
 
         SDL_DestroyRenderer(renderer);
@@ -142,7 +140,7 @@ int main(int argc, char *argv[]) {
     }
 
     // Framebuffer creation
-    std::vector<uint32_t> framebuffer(WIDTH * HEIGHT, 0xFF000000);
+    Framebuffer framebuffer(WIDTH, HEIGHT);
 
     bool running = true;
     SDL_Event event;
@@ -156,19 +154,19 @@ int main(int argc, char *argv[]) {
     uint32_t yellowColor = 0xFFFFFF00;
 
     // Main loop
-    while(running) {
-        while(SDL_PollEvent(&event)) {
-            if(event.type == SDL_QUIT) {
+    while (running) {
+        while (SDL_PollEvent(&event)) {
+            if (event.type == SDL_QUIT) {
                 running = false;
             }
         }
 
-        // Clear screen
-        clear_screen(framebuffer, 0xFF000000);
+        // Reset
+        framebuffer.reset(0xFF000000);
 
-        draw_triangle(framebuffer, 400, 100, 200, 450, 600, 450, WIDTH, HEIGHT, greenColor);
-        draw_triangle(framebuffer, 100, 50, 150, 250, 50, 200, WIDTH, HEIGHT, redColor);
-        draw_triangle(framebuffer, 700, 50, 710, 500, 650, 480, WIDTH, HEIGHT, yellowColor);
+        draw_triangle(framebuffer, 780, 100, 350, 450, 750, 450, WIDTH, HEIGHT, greenColor);
+        draw_triangle(framebuffer, 50, 50, 150, 250, 50, 200, WIDTH, HEIGHT, redColor);
+        draw_triangle(framebuffer, 200, 150, 300, 100, 400, 150, WIDTH, HEIGHT, yellowColor);
 
         /* 
         draw_line(framebuffer, 400, 300, 700, 100, WIDTH, HEIGHT, blueColor);
@@ -213,5 +211,6 @@ int main(int argc, char *argv[]) {
     SDL_DestroyRenderer(renderer);
     SDL_DestroyTexture(texture);
     SDL_Quit();
+    
     return 0;
 }
