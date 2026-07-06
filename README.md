@@ -119,6 +119,7 @@ software-rasterizer/
 ├── CMakeLists.txt
 ├── LICENSE
 └── README.md
+```
 
 ---
 
