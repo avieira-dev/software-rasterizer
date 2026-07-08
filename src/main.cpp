@@ -1,78 +1,8 @@
 #include <core/framebuffer.h>
+#include <raster/rasterizer.h>
 
 #include <SDL.h>
-#include <vector>
 #include <cstdint>
-
-void draw_pixel(Framebuffer& fb, int x, int y, uint32_t color) {
-
-    fb.setPixel(x, y, color);
-}
-
-// Bresenham's Algorithm
-void draw_line(Framebuffer& fb, int x0, int y0, int x1, int y1, int width, int height, uint32_t color) {
-
-    // Calculate the distances
-    int dx = abs(x1 - x0);
-    int dy = -abs(y1 - y0);
-
-    // Direction of the steps
-    int sx = (x0 < x1) ? 1 : -1;
-    int sy = (y0 < y1) ? 1 : -1;
-
-    // Initial error
-    int error = dx + dy;
-
-    while (true) {
-        // Draw the current pixel
-        draw_pixel(fb, x0, y0, color);
-
-        if (x0 == x1 && y0 == y1) {
-            break;
-        }
-
-        int error2 = 2 * error;
-
-        // Walk on the X axis?
-        if (error2 >= dy) {
-            error += dy;
-            x0 += sx;
-        }
-
-        // Walk on the Y axis?
-        if (error2 <= dx) {
-            error += dx;
-            y0 += sy;
-        }
-    }
-}
-
-void draw_triangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, int width, int height, uint32_t color) {
-
-    draw_line(fb, x0, y0, x1, y1, width, height, color);
-    draw_line(fb, x1, y1, x2, y2, width, height, color);
-    draw_line(fb, x2, y2, x0, y0, width, height, color);
-}
-
-/*
-void draw_horizontal_line(std::vector<uint32_t>& buffer, int fix_y, int max_x, int width, int height, uint32_t color) {
-
-    if (max_x >= 0 && max_x < width && fix_y >= 0 && fix_y < height) {
-        for (int x = 0; x <= max_x; x++) {
-            draw_pixel(buffer, x, fix_y, width, height, color);
-        }
-    }
-}
-
-void draw_vertical_line(std::vector<uint32_t>& buffer, int fix_x, int max_y, int width, int height, uint32_t color) {
-
-    if (max_y >= 0 && max_y < height && fix_x >= 0 && fix_x < width) {
-        for (int y = 0; y <= max_y; y++) {
-            draw_pixel(buffer, fix_x, y, width, height, color);
-        }
-    }
-}
-*/
 
 int main(int argc, char *argv[]) {
 
@@ -86,49 +16,35 @@ int main(int argc, char *argv[]) {
     // Initialize SDL
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "SDL could not initialize! SDL_Error: %s\n", SDL_GetError());
+
         return 1;
     }
 
     // Create an application window with the following settings
-    window = SDL_CreateWindow(
-        "Software Rasterizer",
-        SDL_WINDOWPOS_CENTERED,
-        SDL_WINDOWPOS_CENTERED,
-        WIDTH,
-        HEIGHT,
-        0
-    );
+    window = SDL_CreateWindow("Software Rasterizer", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, WIDTH, HEIGHT, 0);
 
     if(!window) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Could not create window: %s\n", SDL_GetError());
 
         SDL_Quit();
+
         return 1;
     }
 
     // Renderer creation
-    renderer = SDL_CreateRenderer(
-        window,
-        -1,
-        SDL_RENDERER_ACCELERATED
-    );
+    renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
     if (!renderer) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "Unable to render: %s\n", SDL_GetError());
 
         SDL_DestroyWindow(window);
         SDL_Quit();
+
         return 1;
     }
 
     // Texture creation
-    texture = SDL_CreateTexture(
-        renderer,
-        SDL_PIXELFORMAT_ARGB8888,
-        SDL_TEXTUREACCESS_STREAMING,
-        WIDTH,
-        HEIGHT
-    );
+    texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_ARGB8888, SDL_TEXTUREACCESS_STREAMING, WIDTH, HEIGHT);
 
     if (!texture) {
         SDL_LogError(SDL_LOG_CATEGORY_ERROR, "It was not possible to create the texture: %s\n", SDL_GetError());
@@ -136,18 +52,19 @@ int main(int argc, char *argv[]) {
         SDL_DestroyRenderer(renderer);
         SDL_DestroyWindow(window);
         SDL_Quit();
+
         return 1;
     }
 
     // Framebuffer creation
     Framebuffer framebuffer(WIDTH, HEIGHT);
 
+    // Rasterizer creation
+    Rasterizer raster{};
+
     bool running = true;
     SDL_Event event;
 
-    // Starting position
-    int pixel_x = 0;
-    int pixel_y = 300;
     uint32_t redColor = 0xFFFF0000;
     uint32_t blueColor = 0xFF0000FF;
     uint32_t greenColor = 0xFF00FF00;
@@ -164,41 +81,13 @@ int main(int argc, char *argv[]) {
         // Reset
         framebuffer.reset(0xFF000000);
 
-        draw_triangle(framebuffer, 780, 100, 350, 450, 750, 450, WIDTH, HEIGHT, greenColor);
-        draw_triangle(framebuffer, 50, 50, 150, 250, 50, 200, WIDTH, HEIGHT, redColor);
-        draw_triangle(framebuffer, 200, 150, 300, 100, 400, 150, WIDTH, HEIGHT, yellowColor);
-
-        /* 
-        draw_line(framebuffer, 400, 300, 700, 100, WIDTH, HEIGHT, blueColor);
-        draw_line(framebuffer, 400, 300, 700, 500, WIDTH, HEIGHT, redColor);
-        draw_line(framebuffer, 400, 300, 100, 300, WIDTH, HEIGHT, greenColor);
-        draw_line(framebuffer, 400, 300, 400, 50, WIDTH, HEIGHT, yellowColor);
-        */
-
-        /*
-        draw_horizontal_line(framebuffer, 300, 400, WIDTH, HEIGHT, blueColor);
-        draw_vertical_line(framebuffer, 400, 300, WIDTH, HEIGHT, greenColor);
-        /*
-
-        /* Animation
-
-        draw_pixel(framebuffer, pixel_x, pixel_y, WIDTH, HEIGHT, redColor);
-
-        pixel_x++;
-
-        if(pixel_x >= WIDTH) {
-            pixel_x = 0;
-        }
-
-        */
+        raster.drawTriangle(framebuffer, 780, 100, 350, 450, 750, 450, blueColor);
+        raster.drawTriangle(framebuffer, 80, 80, 180, 280, 80, 280, greenColor);
+        raster.drawTriangle(framebuffer, 200, 150, 300, 100, 400, 150, redColor);
+        raster.drawTriangle(framebuffer, 100, 50, 200, 8, 300, 50, yellowColor);
 
         // Array upload
-        SDL_UpdateTexture(
-            texture,
-            NULL,
-            framebuffer.data(),
-            WIDTH * sizeof(uint32_t)
-        );
+        SDL_UpdateTexture(texture, NULL, framebuffer.data(), WIDTH * sizeof(uint32_t));
 
         // Draw the texture to the window
         SDL_RenderClear(renderer);

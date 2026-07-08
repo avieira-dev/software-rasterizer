@@ -7,6 +7,7 @@
 <p>
   <img src="https://img.shields.io/badge/status-in%20development-f39c12?style=flat-square"/>
   <img src="https://img.shields.io/badge/language-C++-00599C?style=flat-square&logo=cplusplus&logoColor=white"/>
+  <img src="https://img.shields.io/badge/library-SDL2-0A7DB8?style=flat-square&logo=sdl&logoColor=white"/>
   <img src="https://img.shields.io/badge/build-CMake-8a63d2?style=flat-square&logo=cmake&logoColor=white"/>
   <img src="https://img.shields.io/badge/license-MIT-6e7781?style=flat-square"/>
 </p>
@@ -30,7 +31,9 @@
 
 ## About
 
-This project implements a graphics pipeline entirely in software — no GPU API, no hardware rasterization. Every pixel is computed on the CPU and written directly to a framebuffer represented as a `std::vector<uint32_t>`.
+This project implements a graphics pipeline entirely in software — no GPU API, no hardware rasterization. Every pixel is computed on the CPU and written to a dedicated `Framebuffer` abstraction, which internally manages a contiguous `std::vector<uint32_t>`.
+
+The rendering algorithms are implemented in a dedicated `Rasterizer` module, keeping rendering logic separated from framebuffer management and application code.
 
 The goal is to understand from first principles what a GPU does internally: how triangles get transformed, clipped, and filled; how depth testing works; and how a frame ends up on screen.
 
@@ -52,12 +55,14 @@ The goal is to understand from first principles what a GPU does internally: how 
 ## Implementations
 
 ### Framebuffer
-- **Direct memory access** — the framebuffer is a raw `std::vector<uint32_t>` treated as video memory
-- **`draw_pixel`** — bounds-checked pixel write; prevents out-of-range memory access
-- **`clear_screen`** — fast full-buffer clear each frame
+- **Framebuffer abstraction** — encapsulates a contiguous `std::vector<uint32_t>` representing video memory
+- **Safe pixel access** — bounds-checked writes prevent out-of-range memory access
+- **Fast buffer clearing** — efficiently resets the entire framebuffer to a single color
 
-### Primitives
-- **Bresenham's Line Algorithm** — integer-only line rasterization; no floating point, no divisions
+### Rasterizer
+- **Pixel rasterization** — writes pixels through the `Framebuffer` interface
+- **Bresenham's line algorithm** — integer-only line rasterization without floating-point arithmetic
+- **Wireframe triangles** — rendered by connecting the three vertices with line primitives
 
 ### Platform
 - **SDL2** — window creation, event handling, and real-time texture streaming to the display
@@ -109,13 +114,18 @@ cmake .. && cmake --build .
 ```text
 software-rasterizer/
 ├── include/
-│   └── core/
-│       └── framebuffer.h
+│   ├── core/
+│   │   └── framebuffer.h
+│   └── raster/
+│       └── rasterizer.h
 ├── src/
 │   ├── core/
 │   │   └── framebuffer.cpp
+│   ├── raster/
+│   │   └── rasterizer.cpp
 │   └── main.cpp
 ├── screenshots/
+├── .gitignore
 ├── CMakeLists.txt
 ├── LICENSE
 └── README.md
