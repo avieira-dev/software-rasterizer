@@ -20,7 +20,6 @@
  * primitives into pixels.
  */
 class Rasterizer {
-
 public:
     /**
      * @brief Draws a single pixel.

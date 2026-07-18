@@ -5,17 +5,14 @@ Framebuffer::Framebuffer(size_t w, size_t h)
 }
 
 const uint32_t* Framebuffer::data() const {
-
     return pixels.data();
 }
 
 size_t Framebuffer::getWidth() const {
-
     return width;
 }
 
 size_t Framebuffer::getHeight() const {
-
     return height;
 }
 
@@ -26,7 +23,6 @@ size_t Framebuffer::getHeight() const {
  * prevent unsigned integer wraparound during index calculation.
  */
 bool Framebuffer::setPixel(int x, int y, uint32_t color) {
-
     if (x < 0 || y < 0) {
         return false;
     }
@@ -44,7 +40,6 @@ bool Framebuffer::setPixel(int x, int y, uint32_t color) {
 }
 
 void Framebuffer::reset(uint32_t color) {
-
     std::fill(pixels.begin(), pixels.end(), color);
 }
 

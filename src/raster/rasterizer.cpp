@@ -3,7 +3,6 @@
 #include <cstdlib>
 
 void Rasterizer::drawPixel(Framebuffer& fb, int x, int y, uint32_t color) {
-
     fb.setPixel(x, y, color);
 }
 
@@ -14,7 +13,6 @@ void Rasterizer::drawPixel(Framebuffer& fb, int x, int y, uint32_t color) {
  * line without performing floating-point calculations.
  */
 void Rasterizer::drawLine(Framebuffer& fb, int x0, int y0, int x1, int y1, uint32_t color) {
-
     int x = x0;
     int y = y0;
 
@@ -57,7 +55,6 @@ void Rasterizer::drawLine(Framebuffer& fb, int x0, int y0, int x1, int y1, uint3
 }
 
 void Rasterizer::drawTriangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color) {
-
     drawLine(fb, x0, y0, x1, y1, color);
     drawLine(fb, x1, y1, x2, y2, color);
     drawLine(fb, x2, y2, x0, y0, color);

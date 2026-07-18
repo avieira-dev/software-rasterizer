@@ -18,7 +18,6 @@
  * basic operations for pixel manipulation and buffer clearing.
  */
 class Framebuffer {
-
 private:
     size_t width;
     size_t height;

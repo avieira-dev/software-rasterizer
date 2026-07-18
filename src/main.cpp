@@ -5,7 +5,6 @@
 #include <cstdint>
 
 int main(int argc, char *argv[]) {
-
     const int WIDTH = 800;
     const int HEIGHT = 600;
 
