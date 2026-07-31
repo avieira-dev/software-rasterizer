@@ -1,8 +1,6 @@
 #include <core/framebuffer.h>
 
-Framebuffer::Framebuffer(size_t w, size_t h)
-    : width(w), height(h), pixels(w * h, 0xFF000000) {
-}
+Framebuffer::Framebuffer(size_t w, size_t h) : width(w), height(h), pixels(w * h, 0xFF000000) {}
 
 const uint32_t* Framebuffer::data() const {
     return pixels.data();
