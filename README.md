@@ -71,14 +71,14 @@ The goal is to understand from first principles what a GPU does internally: how 
 
 ## Roadmap
 
-| Feature | Status |
-|---|---|
-| Framebuffer setup & SDL2 integration | ✅ Done |
-| Bresenham line algorithm | ✅ Done |
-| Wireframe triangles | ✅ Done |
+| Feature                                   | Status     |
+|-------------------------------------------|------------|
+| Framebuffer setup & SDL2 integration      | ✅ Done    |
+| Bresenham line algorithm                  | ✅ Done    |
+| Wireframe triangles                       | ✅ Done    |
 | Triangle filling (scanline / barycentric) | 🔲 Planned |
-| 3D wireframe with perspective projection | 🔲 Planned |
-| Z-buffer and depth testing | 🔲 Planned |
+| 3D wireframe with perspective projection  | 🔲 Planned |
+| Z-buffer and depth testing                | 🔲 Planned |
 
 ---
 
@@ -86,11 +86,11 @@ The goal is to understand from first principles what a GPU does internally: how 
 
 ### Prerequisites
 
-| Dependency | Version |
-|---|---|
+| Dependency                 | Version        |
+|----------------------------|----------------|
 | C++ compiler (GCC / Clang) | C++17 or later |
-| CMake | 3.10+ |
-| SDL2 | Latest stable |
+| CMake                      | 3.10+          |
+| SDL2                       | Latest stable  |
 
 ### Steps
 
@@ -116,11 +116,15 @@ software-rasterizer/
 ├── include/
 │   ├── core/
 │   │   └── framebuffer.h
+│   ├── platform/
+│   │   └── sdl_context.h
 │   └── raster/
 │       └── rasterizer.h
 ├── src/
 │   ├── core/
 │   │   └── framebuffer.cpp
+│   ├── platform/
+│   │   └── sdl_context.cpp
 │   ├── raster/
 │   │   └── rasterizer.cpp
 │   └── main.cpp
@@ -136,7 +140,7 @@ software-rasterizer/
 ## Developer
 
 **Alexandre Vieira**
-GitHub: [@avieira-dev](https://github.com/avieira-dev)
+GitHub: **[@avieira-dev](https://github.com/avieira-dev)**
 
 ---
 
