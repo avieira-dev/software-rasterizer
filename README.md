@@ -71,14 +71,20 @@ The goal is to understand from first principles what a GPU does internally: how 
 
 ## Roadmap
 
-| Feature                                   | Status     |
-|-------------------------------------------|------------|
-| Framebuffer setup & SDL2 integration      | ✅ Done    |
-| Bresenham line algorithm                  | ✅ Done    |
-| Wireframe triangles                       | ✅ Done    |
-| Triangle filling (scanline / barycentric) | 🔲 Planned |
-| 3D wireframe with perspective projection  | 🔲 Planned |
-| Z-buffer and depth testing                | 🔲 Planned |
+| Feature                                  | Status         |
+|------------------------------------------|----------------|
+| Framebuffer setup & SDL2 integration     | ✅ Done        |
+| Bresenham line algorithm                 | ✅ Done        |
+| Wireframe triangles                      | ✅ Done        |
+| Filled triangles (barycentric rasterizer)| 🔄 In Progress |
+| Vertex color interpolation               | 🔲 Planned     |
+| 3D wireframe with perspective projection | 🔲 Planned     |
+| Triangle clipping                        | 🔲 Planned     |
+| Back-face culling                        | 🔲 Planned     |
+| Z-buffer and depth testing               | 🔲 Planned     |
+| Texture mapping                          | 🔲 Planned     |
+| Perspective-correct interpolation        | 🔲 Planned     |
+| Basic lighting                           | 🔲 Planned     |
 
 ---
 
