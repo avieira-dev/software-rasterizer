@@ -42,4 +42,3 @@ bool Framebuffer::setPixel(int x, int y, uint32_t color) {
 void Framebuffer::reset(uint32_t color) {
     std::fill(pixels.begin(), pixels.end(), color);
 }
-
