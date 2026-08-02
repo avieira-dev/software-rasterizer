@@ -59,6 +59,23 @@ public:
      * @param color Triangle color in ARGB8888 format.
      */
     void drawTriangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color);
+
+    /**
+     * @brief Draws a filled triangle using barycentric rasterization.
+     *
+     * Rasterizes the interior of the triangle by testing each pixel inside
+     * the bounding box with barycentric edge functions.
+     *
+     * @param fb Destination framebuffer.
+     * @param x0 First vertex X coordinate.
+     * @param y0 First vertex Y coordinate.
+     * @param x1 Second vertex X coordinate.
+     * @param y1 Second vertex Y coordinate.
+     * @param x2 Third vertex X coordinate.
+     * @param y2 Third vertex Y coordinate.
+     * @param color Triangle fill color in ARGB8888 format.
+     */
+    void drawFilledTriangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color);
 };
 
 #endif

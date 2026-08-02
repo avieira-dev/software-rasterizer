@@ -33,9 +33,11 @@
 
 This project implements a graphics pipeline entirely in software — no GPU API, no hardware rasterization. Every pixel is computed on the CPU and written to a dedicated `Framebuffer` abstraction, which internally manages a contiguous `std::vector<uint32_t>`.
 
-The rendering algorithms are implemented in a dedicated `Rasterizer` module, keeping rendering logic separated from framebuffer management and application code.
+The rendering algorithms are implemented in a dedicated `Rasterizer` module, keeping rasterization logic separated from framebuffer management and application code.
 
-The goal is to understand from first principles what a GPU does internally: how triangles get transformed, clipped, and filled; how depth testing works; and how a frame ends up on screen.
+The current implementation explores the foundations of the rendering pipeline through pixel drawing, line rasterization, wireframe triangles, and filled triangle rasterization using barycentric coordinates.
+
+The goal is to understand from first principles how modern graphics pipelines work: how geometric primitives are converted into pixels, how triangle filling works, and how more advanced concepts such as transformations, clipping, depth testing, and lighting are built on top of this foundation.
 
 **Core stack:** C++ · SDL2 · CMake
 
@@ -47,7 +49,9 @@ The goal is to understand from first principles what a GPU does internally: how 
   <em>Bresenham's line algorithm — various slopes and colors</em><br>
   <img src="./screenshots/img-001.png" alt="Multiple colored lines at different angles" width="600"/><br><br>
   <em>Wireframe triangles — vertices connected using the line primitive</em><br>
-  <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600"/>
+  <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600"/><br><br>
+  <em>Filled triangles — barycentric rasterization using edge functions</em><br>
+  <img src="./screenshots/img-003.png" alt="Filled triangles rasterized using barycentric coordinates" width="600"/>
 </p>
 
 ---
@@ -63,6 +67,7 @@ The goal is to understand from first principles what a GPU does internally: how 
 - **Pixel rasterization** — writes pixels through the `Framebuffer` interface
 - **Bresenham's line algorithm** — integer-only line rasterization without floating-point arithmetic
 - **Wireframe triangles** — rendered by connecting the three vertices with line primitives
+- **Filled triangles** — barycentric rasterization using edge functions and bounding-box traversal
 
 ### Platform
 - **SDL2** — window creation, event handling, and real-time texture streaming to the display
@@ -76,7 +81,7 @@ The goal is to understand from first principles what a GPU does internally: how 
 | Framebuffer setup & SDL2 integration     | ✅ Done        |
 | Bresenham line algorithm                 | ✅ Done        |
 | Wireframe triangles                      | ✅ Done        |
-| Filled triangles (barycentric rasterizer)| 🔄 In Progress |
+| Filled triangles (barycentric rasterizer)| ✅ Done        |
 | Vertex color interpolation               | 🔲 Planned     |
 | 3D wireframe with perspective projection | 🔲 Planned     |
 | Triangle clipping                        | 🔲 Planned     |

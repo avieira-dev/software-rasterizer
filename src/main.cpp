@@ -30,9 +30,15 @@ int main(int argc, char *argv[]) {
         context.processEvent(running);
         framebuffer.reset(blackColor);
 
-        raster.drawTriangle(framebuffer, 780, 100, 350, 450, 750, 450, blueColor);
-        raster.drawTriangle(framebuffer, 80, 80, 180, 280, 80, 280, greenColor);
-        raster.drawTriangle(framebuffer, 200, 150, 300, 100, 400, 150, yellowColor);
+        //raster.drawTriangle(framebuffer, 50, 50, 250, 50, 50, 250, greenColor);
+        //raster.drawTriangle(framebuffer, 500, 50, 700, 50, 600, 250, yellowColor);
+        //raster.drawTriangle(framebuffer, 150, 350, 50, 550, 250, 550, redColor);
+        //raster.drawTriangle(framebuffer, 450, 350, 750, 350, 600, 550, blueColor);
+
+        raster.drawFilledTriangle(framebuffer, 50, 50, 250, 50, 50, 250, greenColor);
+        raster.drawFilledTriangle(framebuffer, 500, 50, 700, 50, 600, 250, yellowColor);
+        raster.drawFilledTriangle(framebuffer, 150, 350, 50, 550, 250, 550, redColor);
+        raster.drawFilledTriangle(framebuffer, 450, 350, 750, 350, 600, 550, blueColor);
 
         context.updateTexture(framebuffer.data());
         context.present();
