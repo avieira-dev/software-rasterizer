@@ -51,7 +51,7 @@ The goal is to understand from first principles how a modern graphics pipeline w
     <em>Wireframe triangles — vertices connected using the line primitive</em><br>
     <img src="./screenshots/img-002.png" alt="Three wireframe triangles in different shapes and colors" width="600"/><br><br>
     <em>Filled triangles — barycentric rasterization using edge functions</em><br>
-    <img src="./screenshots/img-003.png" alt="Filled triangles rasterized using barycentric coordinates" width="600"/>
+    <img src="./screenshots/img-003.png" alt="Filled triangles rasterized using barycentric coordinates" width="600"/><br><br>
     <em>Vertex color interpolation — smooth color gradients using barycentric coordinates</em><br>
     <img src="./screenshots/img-004.png" alt="Triangle with smoothly interpolated vertex colors" width="600"/>
 </p>
