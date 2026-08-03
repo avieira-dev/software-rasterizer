@@ -76,6 +76,26 @@ public:
      * @param color Triangle fill color in ARGB8888 format.
      */
     void drawFilledTriangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color);
+
+    /**
+     * @brief Draws a filled triangle with interpolated vertex colors.
+     *
+     * Rasterizes the triangle using barycentric coordinates and linearly
+     * interpolates the color of each pixel from the colors assigned to
+     * the three vertices.
+     *
+     * @param fb Destination framebuffer.
+     * @param x0 First vertex X coordinate.
+     * @param y0 First vertex Y coordinate.
+     * @param x1 Second vertex X coordinate.
+     * @param y1 Second vertex Y coordinate.
+     * @param x2 Third vertex X coordinate.
+     * @param y2 Third vertex Y coordinate.
+     * @param color0 Color of the first vertex in ARGB8888 format.
+     * @param color1 Color of the second vertex in ARGB8888 format.
+     * @param color2 Color of the third vertex in ARGB8888 format.
+     */
+    void drawColoredTriangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color0, uint32_t color1, uint32_t color2);
 };
 
 #endif
