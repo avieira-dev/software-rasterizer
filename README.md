@@ -16,20 +16,7 @@
 
 ---
 
-## Table of Contents
-
-- [About](#about)
-- [Showcase](#showcase)
-- [Implementations](#implementations)
-- [Roadmap](#roadmap)
-- [Build & Run](#build--run)
-- [Project Structure](#project-structure)
-- [Developer](#developer)
-- [License](#license)
-
----
-
-## About
+## Overview
 
 This project implements a graphics pipeline entirely in software — no GPU API, no hardware rasterization. Every pixel is computed on the CPU and written to a dedicated `Framebuffer` abstraction, which internally manages a contiguous `std::vector<uint32_t>`.
 
@@ -40,6 +27,18 @@ The current implementation explores the foundations of the rendering pipeline th
 The goal is to understand from first principles how a modern graphics pipeline works: how geometric primitives are converted into pixels, how triangle filling works, and how more advanced concepts such as transformations, clipping, depth testing, and lighting are built on top of this foundation.
 
 **Core stack:** C++ · SDL2 · CMake
+
+---
+
+## Table of Contents
+
+- [Showcase](#showcase)
+- [Implementations](#implementations)
+- [Roadmap](#roadmap)
+- [Build & Run](#build--run)
+- [Project Structure](#project-structure)
+- [Author](#author)
+- [License](#license)
 
 ---
 
@@ -151,9 +150,9 @@ software-rasterizer/
 
 ---
 
-## Developer
+## Author
 
-**Alexandre Vieira**
+**Alexandre Vieira**  
 GitHub: **[@avieira-dev](https://github.com/avieira-dev)**
 
 ---
