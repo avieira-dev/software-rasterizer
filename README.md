@@ -78,20 +78,20 @@ The goal is to understand from first principles how a modern graphics pipeline w
 
 ## Roadmap
 
-| Feature                                  | Status         |
-|------------------------------------------|----------------|
-| Framebuffer setup & SDL2 integration     | ✅ Done        |
-| Bresenham line algorithm                 | ✅ Done        |
-| Wireframe triangles                      | ✅ Done        |
-| Filled triangles (barycentric rasterizer)| ✅ Done        |
-| Vertex color interpolation               | ✅ Done        |
-| 3D wireframe with perspective projection | 🔄 In Progress |
-| Triangle clipping                        | 🔲 Planned     |
-| Back-face culling                        | 🔲 Planned     |
-| Z-buffer and depth testing               | 🔲 Planned     |
-| Texture mapping                          | 🔲 Planned     |
-| Perspective-correct interpolation        | 🔲 Planned     |
-| Basic lighting                           | 🔲 Planned     |
+| Feature                                  | Status                      |
+|------------------------------------------|-----------------------------|
+| Framebuffer setup & SDL2 integration     | ████████████████████ `100%` |
+| Bresenham line algorithm                 | ████████████████████ `100%` |
+| Wireframe triangles                      | ████████████████████ `100%` |
+| Filled triangles (barycentric rasterizer)| ████████████████████ `100%` |
+| Vertex color interpolation               | ████████████████████ `100%` |
+| 3D wireframe with perspective projection | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| Triangle clipping                        | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| Back-face culling                        | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| Z-buffer and depth testing               | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| Texture mapping                          | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| Perspective-correct interpolation        | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| Basic lighting                           | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
 
 ---
 
