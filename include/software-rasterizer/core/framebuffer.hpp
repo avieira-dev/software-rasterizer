@@ -5,8 +5,7 @@
  * Licensed under the MIT License.
  */
 
-#ifndef CORE_FRAMEBUFFER_H
-#define CORE_FRAMEBUFFER_H
+#pragma once
 
 #include <cstdint>
 #include <vector>
@@ -77,5 +76,3 @@ public:
      */
     void reset(uint32_t color);
 };
-
-#endif

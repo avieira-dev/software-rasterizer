@@ -1,4 +1,4 @@
-#include <core/framebuffer.h>
+#include "software-rasterizer/core/framebuffer.hpp"
 
 Framebuffer::Framebuffer(size_t w, size_t h) : width(w), height(h), pixels(w * h, 0xFF000000) {}
 

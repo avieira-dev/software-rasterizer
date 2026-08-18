@@ -5,12 +5,11 @@
  * Licensed under the MIT License.
  */
 
-#ifndef RASTER_RASTERIZER_H
-#define RASTER_RASTERIZER_H
-
-#include <core/framebuffer.h>
+#pragma once
 
 #include <cstdint>
+
+#include "software-rasterizer/core/framebuffer.hpp"
 
 /**
  * @brief Provides software rasterization algorithms.
@@ -97,5 +96,3 @@ public:
      */
     void drawColoredTriangle(Framebuffer& fb, int x0, int y0, int x1, int y1, int x2, int y2, uint32_t color0, uint32_t color1, uint32_t color2);
 };
-
-#endif

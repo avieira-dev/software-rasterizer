@@ -99,11 +99,11 @@ The goal is to understand from first principles how a modern graphics pipeline w
 
 ### Prerequisites
 
-| Dependency                 | Version        |
-|----------------------------|----------------|
-| C++ compiler (GCC / Clang) | C++17 or later |
-| CMake                      | 3.10+          |
-| SDL2                       | Latest stable  |
+| Dependency                 | Version       |
+|----------------------------|---------------|
+| C++ compiler (GCC / Clang) | C++20         |
+| CMake                      | 3.10+         |
+| SDL2                       | Latest stable |
 
 ### Steps
 
@@ -126,13 +126,15 @@ cmake .. && cmake --build .
 
 ```text
 software-rasterizer/
+├─ build/
 ├── include/
-│   ├── core/
-│   │   └── framebuffer.h
-│   ├── platform/
-│   │   └── sdl_context.h
-│   └── raster/
-│       └── rasterizer.h
+|   └── software-rasterizer/
+│       ├── core/
+│       │   └── framebuffer.hpp
+│       ├── platform/
+│       │   └── sdl_context.hpp
+│       └── raster/
+│           └── rasterizer.hpp
 ├── src/
 │   ├── core/
 │   │   └── framebuffer.cpp

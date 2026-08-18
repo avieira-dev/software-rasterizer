@@ -5,8 +5,7 @@
  * Licensed under the MIT License.
  */
 
-#ifndef PLATFORM_SDL_CONTEXT
-#define PLATFORM_SDL_CONTEXT
+#pragma once
 
 #include <SDL.h>
 #include <cstdint>
@@ -69,5 +68,3 @@ public:
      */
     void processEvent(bool& running);
 };
-
-#endif

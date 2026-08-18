@@ -1,7 +1,7 @@
-#include <platform/sdl_context.h>
-
 #include <stdexcept>
 #include <string>
+
+#include <software-rasterizer/platform/sdl_context.hpp>
 
 SDLContext::SDLContext(int width, int height, const char* title) : window(nullptr), renderer(nullptr), texture(nullptr), width(width), height(height) {
     if (SDL_Init(SDL_INIT_VIDEO) != 0) {
