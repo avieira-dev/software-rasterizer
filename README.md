@@ -85,13 +85,13 @@ The goal is to understand from first principles how a modern graphics pipeline w
 | Wireframe triangles                      | ████████████████████ `100%` |
 | Filled triangles (barycentric rasterizer)| ████████████████████ `100%` |
 | Vertex color interpolation               | ████████████████████ `100%` |
-| 3D wireframe with perspective projection | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
-| Triangle clipping                        | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
-| Back-face culling                        | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
-| Z-buffer and depth testing               | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
-| Texture mapping                          | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
-| Perspective-correct interpolation        | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
-| Basic lighting                           | ░░░░░░░░░░░░░░░░░░░░ `0%´   |
+| 3D wireframe with perspective projection | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Triangle clipping                        | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Back-face culling                        | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Z-buffer and depth testing               | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Texture mapping                          | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Perspective-correct interpolation        | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
+| Basic lighting                           | ░░░░░░░░░░░░░░░░░░░░ `0%`   |
 
 ---
 
