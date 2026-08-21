@@ -1,9 +1,9 @@
-#include <SDL.h>
-#include <cstdint>
-
 #include "software-rasterizer/core/framebuffer.hpp"
-#include "software-rasterizer/raster/rasterizer.hpp"
 #include "software-rasterizer/platform/sdl_context.hpp"
+#include "software-rasterizer/raster/rasterizer.hpp"
+
+#include <cstdint>
+#include <SDL.h>
 
 int main(int argc, char *argv[]) {
     const int WIDTH = 800;

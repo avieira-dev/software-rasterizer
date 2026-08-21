@@ -1,8 +1,8 @@
+#include "software-rasterizer/raster/rasterizer.hpp"
+
 #include <algorithm>
 #include <cmath>
 #include <cstdlib>
-
-#include <software-rasterizer/raster/rasterizer.hpp>
 
 namespace {
     struct BoundingBox {

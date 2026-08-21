@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <SDL.h>
 #include <cstdint>
+#include <SDL.h>
 
 /**
  * @brief Manages SDL initialization and rendering resources.

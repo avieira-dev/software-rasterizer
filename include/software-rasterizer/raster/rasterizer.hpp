@@ -7,9 +7,9 @@
 
 #pragma once
 
-#include <cstdint>
-
 #include "software-rasterizer/core/framebuffer.hpp"
+
+#include <cstdint>
 
 /**
  * @brief Provides software rasterization algorithms.
